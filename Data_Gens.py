@@ -9,7 +9,7 @@ from torch.utils.data import Dataset
 import numpy as np
 from torch.utils.data import DataLoader
 import cv2
-import PIL as Image
+import PIL.Image as Image
 from torchvision import transforms
 import matplotlib.pyplot as plt
 
