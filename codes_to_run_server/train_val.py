@@ -49,13 +49,13 @@ train_transform = transforms.Compose([
         transforms.ColorJitter(hue=0.1)]),
         #transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))      
+        transforms.Normalize((0.8946, 0.8659, 0.8638), (0.8946, 0.8659, 0.8638))      
     ])
 
 test_transform = transforms.Compose([
         transforms.Resize((224, 224)),                            
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))      
+        transforms.Normalize((0.8946, 0.8659, 0.8638), (0.8946, 0.8659, 0.8638))      
     ])
     
 from Data_Gens import Data_Loader_Train,Data_Loader_Val

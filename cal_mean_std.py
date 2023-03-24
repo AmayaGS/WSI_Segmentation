@@ -75,8 +75,8 @@ def Data_Loader_Train( image_dir, mask_dir, train_transform, batch_size, num_wor
     return data_loader
 
 
-train_imgs = r'C:\My_Data\Amaya\Train\img'
-train_masks = r'C:\My_Data\Amaya\Train\GT'
+train_imgs = r'C:\Users\Amaya\Documents\PhD\Data\IHC synovium segmentation\Train\img'
+train_masks = r'C:\Users\Amaya\Documents\PhD\Data\IHC synovium segmentation\Train\GT'
 
 train_loader = Data_Loader_Train(train_imgs, train_masks, train_transform, batch_size = 2)
 
