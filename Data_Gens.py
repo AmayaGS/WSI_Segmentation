@@ -30,13 +30,13 @@ train_transform = transforms.Compose([
         transforms.ColorJitter(hue=0.1)]),
         #transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))      
+        transforms.Normalize((0.8946, 0.8659, 0.8638), (0.1050, 0.1188, 0.1180))      
     ])
 
 test_transform = transforms.Compose([
         transforms.Resize((224, 224)),                            
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))      
+        transforms.Normalize((0.8946, 0.8659, 0.8638), (0.1050, 0.1188, 0.1180))      
     ])
 
 
