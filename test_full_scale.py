@@ -44,7 +44,7 @@ width=224
 test_transform = transforms.Compose([
         # transforms.Resize((224, 224)),                            
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))      
+        # transforms.Normalize((0.8946, 0.8659, 0.8638), (0.1050, 0.1188, 0.1180))      
     ])
 
 PIL.Image.MAX_IMAGE_PIXELS = 425779200
@@ -112,7 +112,14 @@ def blend(image1,gt,pre, ratio=0.5):
     image = image1 * alpha + gt * beta+ pre * theta
     return image
     
-   
+
+test_transform1 = transforms.Compose([
+        # transforms.Resize((224, 224)),                            
+        # transforms.ToTensor(),
+        transforms.Normalize((0.8946, 0.8659, 0.8638), (0.8946, 0.8659, 0.8638))      
+    ])
+
+
 def check_dice_score(test_loader, model, device=DEVICE):
     loop = tqdm(test_loader)
     model.eval()
@@ -127,6 +134,9 @@ def check_dice_score(test_loader, model, device=DEVICE):
             pred1=[]
             for i in range(img_patches.shape[0]):
               single_img =img_patches[i,:,:,:]
+              
+              single_img = test_transform1(single_img)
+              
               single_img=torch.unsqueeze(single_img, axis=0)
               p1=model(single_img)
               
@@ -161,6 +171,7 @@ def check_dice_score(test_loader, model, device=DEVICE):
             
             image = np.float64(image)
             t1 = np.float64(t1)
+            t1 = t1[0,:]
             merged_pre = np.float64(merged_pre)
             
 #            print(image.shape)
@@ -169,7 +180,7 @@ def check_dice_score(test_loader, model, device=DEVICE):
             
             result = blend(image,t1,merged_pre)
                         
-            plt.imsave(os.path.join(path_to_save_visual_results,name+".png"),merged_pre)
+            plt.imsave(os.path.join(path_to_save_visual_results,name+".png"),result)
     
     print(f"Average Dice Score is  : {Avg_Dice_Score/len(test_loader)}")
 
