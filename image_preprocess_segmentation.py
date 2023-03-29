@@ -16,6 +16,7 @@ os.environ["OPENCV_IO_MAX_IMAGE_PIXELS"] = str(pow(2,40))
 import cv2
 import openslide as osi
 import tifffile as tiff
+from PIL import Image
 
 from patchify import patchify
 
@@ -48,9 +49,11 @@ df = pd.read_csv(file, header=0)
 train_ids, test_ids = train_test_split(df['Patient ID'], test_size= 0.3, random_state= 2)
 test_ids, val_ids = train_test_split(test_ids, test_size= 0.2, random_state= 2)
 
-train_ids = list(train_ids)
+#train_ids = list(train_ids)
+train_ids = []
 test_ids = list(test_ids)
-val_ids = list(val_ids)
+#val_ids = list(val_ids)
+val_ids = []
 
 
 # %%
@@ -65,9 +68,10 @@ class SlideImage():
         self.img_ID = self.path.split('\\')[-1].split('_')[0].split('.')[0]
         self.properties = self.slide.properties
         self.adjusted_level = int(slide_level + np.log2(int(self.properties['openslide.objective-power'])/40))
-        self.image_array = np.array(self.slide.read_region((0, 0),
-                                                           self.adjusted_level,
-                                                           self.slide.level_dimensions[self.adjusted_level]).convert(color_channels))
+        self.img = self.slide.read_region((0, 0), self.adjusted_level, self.slide.level_dimensions[self.adjusted_level]).convert(color_channels)
+        
+        self.image_array = np.array(self.img)
+        
         self.n_channels = self.image_array.shape[-1]
         
         np_mask = cv2.imread(mask_path, 0)
@@ -411,42 +415,8 @@ class SlideProcessor():
                                 
                             print('Processing %s' % file_name)  
                             
-                            if self.mode == 'PATCHES':
-                                
-                                slideImg.patchification(width=self.patch_size, height=self.patch_size, step=self.step)
-                                
-                            if self.use_mask:
-                                
-                                # threshold = slideImg.calc_lum_threshold( mode = self.filter_threshold, criteria = 0.1 )
-                                # slideImg.generate_mask(threshold)
-                                slideImg.mask_patchification(width=self.patch_size, height=self.patch_size, step=self.step)       
-                            
-                            slideImg.calc_border_patches()
-                            #slideImg.crop_filter(self.crop_factor)
-                            slideImg.variance_filter(self.variance_factor)
-                            #slideImg.calc_border_patches() ## hace falta dos veces??
-                            
-                            slideImg.filter_patches()
-                
-                            for i, (patch, mask) in enumerate(zip(slideImg.filtered_patches, slideImg.filtered_mask_patches)):
-                                
-                                filename = file_path + '\\%s_%d_%d.png' % (file_name, patch[-2], patch[-1])  
-                                maskname = mask_path + '\\%s_%d_%d.jpg' % (file_name, mask[-2], mask[-1])  
-                                
-                                result_BGR = cv2.cvtColor(patch[0].squeeze(), cv2.COLOR_RGB2BGR)
-                                
-                                cv2.imwrite(filename, result_BGR)
-                                cv2.imwrite(maskname, mask[0].squeeze())
-                            
-                            for i, (bad_patch, bad_mask) in enumerate(zip(slideImg.bad_patches, slideImg.bad_mask_patches)):
-                                
-                                filename = file_path + '\\%s_%d_%d.png' % (file_name, bad_patch[-2], bad_patch[-1])  
-                                maskname = mask_path + '\\%s_%d_%d.jpg' % (file_name, bad_mask[-2], bad_mask[-1]) 
-                                
-                                result_BGR = cv2.cvtColor(bad_patch[0].squeeze(), cv2.COLOR_RGB2BGR)
-                                                            
-                                cv2.imwrite(filename, result_BGR)
-                                cv2.imwrite(maskname, bad_mask[0].squeeze())
+                            slideImg.img.save(file_path + '\\' + file_name + '.png')
+                            Image.fromarray(slideImg.mask).save(mask_path + '\\' + mask_name + '.jpg')
                                 
                             print('Done')
                                 
@@ -544,13 +514,13 @@ for stain in stains:
         
 # %%
 
-# mySlide2 = SlideImage(path=r"C:\Users\AmayaGS\Documents\PhD\Data\R4RA slides\R4RA slides\NZ CD20 SCANNED IMAGES\WHIP-R4RA-W999_CD20_PATH - 2021-02-08 12.44.58.ndpi", slide_level=3)
-# threshold = mySlide2.calc_lum_threshold( mode = 'PEAK', criteria = 0.1)
-# mySlide2.patchification()
-# mySlide2.generate_mask(threshold)
-# mySlide2.mask_patchification()
-# mySlide2.calc_border_patches()
-# mySlide2.crop_filter()    
-# mySlide2.variance_filter(2.5)
-# mySlide2.filter_patches()
-# print(len(mySlide2.filtered_patches)) 
+mySlide2 = SlideImage(path=r"C:\Users\Amaya\Documents\PhD\Data\R4RA slides\Nanozoomer scanned R4RA slides\NZ CD20 SCANNED IMAGES\WHIP-R4RA-W999_CD20_PATH - 2021-02-08 12.44.58.ndpi", mask_path= r'C:\Users\Amaya\Documents\PhD\Data\QuPath CD20\segmentation_masks\WHIP-R4RA-W999_CD20_PATH - 2021-02-08 12.44.58.png', slide_level=3)
+threshold = mySlide2.calc_lum_threshold( mode = 'PEAK', criteria = 0.1)
+mySlide2.patchification()
+mySlide2.generate_mask(threshold)
+mySlide2.mask_patchification()
+mySlide2.calc_border_patches()
+mySlide2.crop_filter()    
+mySlide2.variance_filter(2.5)
+mySlide2.filter_patches()
+print(len(mySlide2.filtered_patches)) 

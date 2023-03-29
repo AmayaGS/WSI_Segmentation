@@ -89,6 +89,7 @@ class UNet_512(nn.Module):
         self.up3 = Up(128, 64 // factor, bilinear)
         self.up4 = Up(64, 32, bilinear)
         self.outc = OutConv(32,1)
+        self.activation = torch.nn.Sigmoid()
                                         
     def forward(self, x):
 
@@ -105,8 +106,8 @@ class UNet_512(nn.Module):
         z4 = self.up3(z3, x2)
         z5 = self.up4(z4, x1)
         logits1 = self.outc(z5)
-         
-        return logits1
+        
+        return self.activation(logits1) 
 
 
 # Input_Image_Channels = 3
