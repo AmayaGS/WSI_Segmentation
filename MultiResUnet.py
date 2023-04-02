@@ -104,7 +104,7 @@ class Respath(torch.nn.Module):
 
 class MultiResUnet(torch.nn.Module):
 
-	def __init__(self, input_channels=1, num_classes=1, alpha=1.67):
+	def __init__(self, input_channels=3, num_classes=1, alpha=1.67):
 		super().__init__()
 		
 		self.alpha = alpha
@@ -196,7 +196,7 @@ class MultiResUnet(torch.nn.Module):
 		return out
         
 
-# Input_Image_Channels = 1
+# Input_Image_Channels = 3
 # def model() -> MultiResUnet:
 #     model = MultiResUnet()
 #     return model
