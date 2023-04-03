@@ -1,7 +1,7 @@
  #### Specify all the paths here #####
    
-train_imgs ='/data/scratch/acw676/Hist/Val/img/'
-train_masks ='/data/scratch/acw676/Hist/Val/GT/'
+train_imgs ='/data/scratch/acw676/Hist/Train/img/'
+train_masks ='/data/scratch/acw676/Hist/Train/GT/'
 
 val_imgs='/data/scratch/acw676/Hist/Val/img/'
 val_masks='/data/scratch/acw676/Hist/Val/GT/'
