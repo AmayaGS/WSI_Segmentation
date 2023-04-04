@@ -156,8 +156,8 @@ class MultiResUnet(torch.nn.Module):
 		self.concat_filters4 = 32 *2
 		self.multiresblock9 = Multiresblock(self.concat_filters4,32)
 		self.in_filters9 = int(32*self.alpha*0.167)+int(32*self.alpha*0.333)+int(32*self.alpha* 0.5)
-
 		self.conv_final = Conv2d_batchnorm(self.in_filters9, num_classes, kernel_size = (1,1), activation='None')
+		self.activation = torch.nn.Sigmoid()
 
 	def forward(self,x : torch.Tensor)->torch.Tensor:
 
@@ -193,7 +193,7 @@ class MultiResUnet(torch.nn.Module):
 
 		out =  self.conv_final(x_multires9)
 		
-		return out
+		return self.activation(out)
         
 
 # Input_Image_Channels = 3

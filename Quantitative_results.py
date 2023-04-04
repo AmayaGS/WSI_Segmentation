@@ -1,8 +1,9 @@
+
 #### Specify all the paths here #####
-test_imgs ='/data/scratch/acw676/AMAMYA/imgs/'   ## full-scale images 
-test_masks ='/data/scratch/acw676/AMAMYA/masks/'  ## full-scale ground truths 
-path_to_checkpoints = "/data/scratch/acw676/AMAMYA/UNet_512_1.pth.tar"
-path_to_save_visual_results='/data/scratch/acw676/AMAMYA/results/'
+test_imgs ='/data/scratch/wpw030/IHC_segmentation/Test1/img/'   ## full-scale images 
+test_masks ='/data/scratch/wpw030/IHC_segmentation/Test1/GT/'  ## full-scale ground truths 
+path_to_checkpoints = "/data/scratch/wpw030/IHC_segmentation/weights/UNet_512_1.pth.tar"
+path_to_save_visual_results='/data/scratch/wpw030/IHC_segmentation/results/'
 
 
 import os
@@ -158,13 +159,10 @@ def check_dice_score(test_loader, model, device=DEVICE):
               p1=p1.cuda().cpu()
               p1 = np.stack((p1,)*3, axis=-1)
               pred1.append(p1)
-			  
-			  del p1
-			  gc.collect()
 
             merged_pre = emp.merge_patches(pred1, mask_indices)
                     
-            t1_cpu = t1.to('cpu)    
+            t1_cpu = t1.to('cpu')    
             t1_cpu= t1_cpu[0,:,:,:].numpy()
             
             dice_score = (2 * (merged_pre * t1_cpu).sum()) / (

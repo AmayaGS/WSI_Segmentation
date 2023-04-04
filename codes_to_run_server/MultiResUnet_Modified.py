@@ -163,6 +163,8 @@ class MultiResUnet_Modified(torch.nn.Module):
         self.in_filters9 = int(32*self.alpha*0.167)+int(32*self.alpha*0.333)+int(32*self.alpha* 0.5)
 
         self.conv_final = Conv2d_batchnorm(self.in_filters9, num_classes, kernel_size = (1,1), activation='None')
+        
+        self.activation = torch.nn.Sigmoid()
 
     def forward(self,x : torch.Tensor)->torch.Tensor:
 
@@ -219,7 +221,7 @@ class MultiResUnet_Modified(torch.nn.Module):
 
         out =  self.conv_final(x_multires9)
         
-        return out
+        return self.activation(out)
         
 
 # Input_Image_Channels = 3
