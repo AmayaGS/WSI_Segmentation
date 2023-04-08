@@ -52,10 +52,7 @@ class Multiresblock(torch.nn.Module):
         c = self.conv_7x7(b)
         
 
-        x = torch.cat([a,b,c],axis=1)
-        # x_sum = a+b+c
-        # x = x + x_sum
-        
+        x = torch.cat([a,b,c],axis=1)        
         x = self.batch_norm1(x)
 
         x = x + shrtct
@@ -163,6 +160,8 @@ class MultiResUnet_Modified(torch.nn.Module):
 
         self.conv_final = Conv2d_batchnorm(self.in_filters9, num_classes+1, kernel_size = (1,1), activation='None')
         self.act = torch.nn.Sigmoid()
+        self.conv_f = torch.nn.Conv2d(in_channels=51, out_channels=1, kernel_size=(1,1))
+
 
     def forward(self,x : torch.Tensor)->torch.Tensor:
 
@@ -189,7 +188,7 @@ class MultiResUnet_Modified(torch.nn.Module):
         up6_sum = c1 + x_multires4
         up6_sum = torch.cat([up6_sum,torch.zeros(up6_sum.shape)],axis=1)
         up6 = up6 + up6_sum  
-       up6 =  self.act(up6)
+        up6 =  self.act(up6)
         
         x_multires6 = self.multiresblock6(up6)
         
@@ -220,8 +219,8 @@ class MultiResUnet_Modified(torch.nn.Module):
         up9 =  self.act(up9)
         
         x_multires9 = self.multiresblock9(up9)
-
-        out =  self.conv_final(x_multires9)
+        
+        out =  self.conv_f(x_multires9)
         
         return self.act(out)
         
