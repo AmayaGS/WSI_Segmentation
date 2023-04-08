@@ -162,6 +162,7 @@ class MultiResUnet_Modified(torch.nn.Module):
         self.in_filters9 = int(32*self.alpha*0.167)+int(32*self.alpha*0.333)+int(32*self.alpha* 0.5)
 
         self.conv_final = Conv2d_batchnorm(self.in_filters9, num_classes+1, kernel_size = (1,1), activation='None')
+        self.act = torch.nn.Sigmoid()
 
     def forward(self,x : torch.Tensor)->torch.Tensor:
 
@@ -187,7 +188,8 @@ class MultiResUnet_Modified(torch.nn.Module):
         up6 = torch.cat([c1,x_multires4],axis=1)
         up6_sum = c1 + x_multires4
         up6_sum = torch.cat([up6_sum,torch.zeros(up6_sum.shape)],axis=1)
-        up6 = up6 + up6_sum
+        up6 = up6 + up6_sum  
+       up6 =  self.act(up6)
         
         x_multires6 = self.multiresblock6(up6)
         
@@ -196,6 +198,7 @@ class MultiResUnet_Modified(torch.nn.Module):
         up7_sum = c2 + x_multires3
         up7_sum = torch.cat([up7_sum,torch.zeros(up7_sum.shape)],axis=1)
         up7 = up7 + up7_sum
+        up7 =  self.act(up7)
         
         x_multires7 = self.multiresblock7(up7)
 
@@ -204,6 +207,7 @@ class MultiResUnet_Modified(torch.nn.Module):
         up8_sum = c3 + x_multires2
         up8_sum = torch.cat([up8_sum,torch.zeros(up8_sum.shape)],axis=1)
         up8 = up8 + up8_sum
+        up8 =  self.act(up8)
         
         x_multires8 = self.multiresblock8(up8)
 
@@ -213,12 +217,13 @@ class MultiResUnet_Modified(torch.nn.Module):
         up9_sum = c4 + x_multires1
         up9_sum = torch.cat([up9_sum,torch.zeros(up9_sum.shape)],axis=1)
         up9 = up9 + up9_sum
+        up9 =  self.act(up9)
         
         x_multires9 = self.multiresblock9(up9)
 
         out =  self.conv_final(x_multires9)
         
-        return out
+        return self.act(out)
         
 
 # Input_Image_Channels = 3
