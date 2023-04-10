@@ -5,7 +5,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 class DoubleConv(nn.Module):
-    """(convolution => [BN] => ReLU) * 2"""
+    """(convolution => [BN] => GELU) * 2"""
 
     def __init__(self, in_channels, out_channels, mid_channels=None):
         super().__init__()
@@ -14,11 +14,11 @@ class DoubleConv(nn.Module):
         self.double_conv = nn.Sequential(
             nn.Conv2d(in_channels, mid_channels, kernel_size=3, padding=1),
             nn.BatchNorm2d(mid_channels),
-            nn.ReLU(),
+            nn.GELU(),
             
             nn.Conv2d(mid_channels, out_channels, kernel_size=3, padding=1),
             nn.BatchNorm2d(out_channels),
-            nn.ReLU(),
+            nn.GELU(),
         )
 
     def forward(self, x):
@@ -94,6 +94,7 @@ class UNet_512(nn.Module):
         self.up3 = Up(128, 64 // factor, bilinear)
         self.up4 = Up(64, 32, bilinear)
         self.outc = OutConv(32,1)
+        self.act = torch.nn.Sigmoid()
                                         
     def forward(self, x):
 
@@ -111,7 +112,8 @@ class UNet_512(nn.Module):
         z5 = self.up4(z4, x1)
         logits1 = self.outc(z5)
          
-        return logits1
+        return self.act(logits1)
+        
 
 
 # Input_Image_Channels = 3
