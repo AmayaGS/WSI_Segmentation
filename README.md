@@ -1,4 +1,4 @@
-# Immunohistochemistry Synovial tissue UNet Segmentation
+# Immunohistochemistry synovial tissue UNet segmentation
 
 --------------
 
@@ -6,7 +6,8 @@ Gallagher-Syed A., Khan A., Rivellese F, Pitzalis C., Lewis M. J., Slabaugh G., 
 
 --------------
 
-We present a fully automated UNet segmentation algorithm, which is freely available and can be used as a first step in any rheumatoid arthritis or with further finetuning, any musculoskeletal IHC image analysis pipeline, avoiding lengthy manual annotation and helping to improve their speed, repeatability and robustness. 
+We provide fully trained UNet segmentation weights for WSI IHC synovial tissue which can be used as the first step in an automated image analysis pipeline. It is robust to common WSIs artefacts, clinical centre/scanner batch effect and can be used on different types of IHC stains. It can be used as is, or fine-tuned on any IHC musculoskeletal dataset, removing the need for manual segmentation by pathologists and offering a solution to the current image analysis bottleneck. 
 
+![alt text](https://github.com/AmayaGS/IHC_Synovium_Segmentation/blob/main/histo_pathotype.png?raw=true)
 ![alt text](https://github.com/AmayaGS/IHC_Synovium_Segmentation/blob/main/Figure2.png?raw=true)
 
