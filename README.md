@@ -16,7 +16,7 @@ A total of 164 patients, fulfilling the 2010 American College of Rheumatology/Eu
 
 ![alt text](https://github.com/AmayaGS/IHC_Synovium_Segmentation/blob/main/histo_pathotype.PNG?raw=false)
 
-Here we show some results:
+Below we show some segmentation results. The algorithm is robust to many WSIs artefacts and to the fragmeted nature of synovial tissue samples and the low contrast inherent to IHC dyes:
 
 ![alt text](https://github.com/AmayaGS/IHC_Synovium_Segmentation/blob/main/Figure2.png?raw=false)
 
