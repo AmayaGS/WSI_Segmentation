@@ -2,7 +2,7 @@
 
 --------------
 
-Gallagher-Syed A., Khan A., Rivellese F, Pitzalis C., Lewis M. J., Slabaugh G., Barnes M., "Automated segmentation of rheumatoid arthritis immunohistochemistry stained synovial tissueL", _Medical Image Understanding and Analysis 2023_, Aberdeen. 2023. <a href="https://github.com/AmayaGS/HistoMIL/blob/ac2ae80b998afc4f7298161562dba8bf2f688a4a/Automated_segmentation_of_Rheumatoid_Arthritis_Immunohistochemistry_stained_synovial_tissue.pdf" target="_blank">Conference abstract paper.</a>
+Gallagher-Syed A., Khan A., Rivellese F, Pitzalis C., Lewis M. J., Slabaugh G., Barnes M., "Automated segmentation of rheumatoid arthritis immunohistochemistry stained synovial tissueL", _Medical Image Understanding and Analysis 2023_, Aberdeen. 2023. <a href="https://github.com/AmayaGS/IHC_Synovium_Segmentation/blob/ac2ae80b998afc4f7298161562dba8bf2f688a4a/Automated_segmentation_of_Rheumatoid_Arthritis_Immunohistochemistry_stained_synovial_tissue.pdf" target="_blank">Conference abstract paper.</a>
 
 --------------
 
