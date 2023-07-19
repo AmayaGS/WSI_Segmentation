@@ -11,3 +11,4 @@ We provide fully trained UNet segmentation weights for WSI IHC synovial tissue w
 ![alt text](https://github.com/AmayaGS/IHC_Synovium_Segmentation/blob/main/histo_pathotype.PNG?raw=true)
 ![alt text](https://github.com/AmayaGS/IHC_Synovium_Segmentation/blob/main/Figure2.png?raw=true)
 
+I am currently cleaning some up some of the code and updating the latest weights, to upload them ASAP. Watch this space!
