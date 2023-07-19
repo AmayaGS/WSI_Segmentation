@@ -8,5 +8,5 @@ Gallagher-Syed A., Khan A., Rivellese F, Pitzalis C., Lewis M. J., Slabaugh G., 
 
 We present a fully automated UNet segmentation algorithm, which is freely available and can be used as a first step in any rheumatoid arthritis or with further finetuning, any musculoskeletal IHC image analysis pipeline, avoiding lengthy manual annotation and helping to improve their speed, repeatability and robustness. 
 
-![alt text](https://github.com/AmayaGS/HistoMIL/blob/main/Figure2.png?raw=true)
+![alt text](https://github.com/AmayaGS/IHC_Synovium_Segmentation/blob/main/Figure2.png?raw=true)
 
