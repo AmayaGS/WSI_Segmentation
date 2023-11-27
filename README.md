@@ -8,7 +8,7 @@ Gallagher-Syed A., Khan A., Rivellese F, Pitzalis C., Lewis M. J., Slabaugh G., 
 
 We provide fully trained UNet segmentation weights for WSI IHC synovial tissue which can be used as the first step in an automated image analysis pipeline. It is robust to common WSIs artefacts, clinical centre/scanner batch effect and can be used on different types of IHC stains. It can be used as is, or fine-tuned on any IHC musculoskeletal dataset, removing the need for manual tissue segmentation by pathologists. 
 
-Trained UNet weights: UNet_512_1.pth.tar
+Trained UNet weights: https://github.com/AmayaGS/IHC_Synovium_Segmentation/UNet_512_1.pth.tar
 
 ### I am currently cleaning up some of the code and updating the latest weights, to upload them here ASAP. Watch this space! ##
 
