@@ -1,2 +1,6 @@
 
 ignore_this.txt
+code/test_patches.py
+code/ipython.html
+code/__pycache__/Models.cpython-39.pyc
+code/test_full_scale.py
