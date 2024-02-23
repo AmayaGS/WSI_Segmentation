@@ -17,6 +17,16 @@ Below we show some segmentation results. The algorithm is robust to many WSIs ar
 ![alt text](https://github.com/AmayaGS/IHC_Synovium_Segmentation/blob/main/paper/Figure2.png?raw=false)
 
 --------------
+If this code or weights are useful to you, please consider citing:
+
+````
+@inproceedings{gallagher2023automated,
+  title={Automated segmentation of rheumatoid arthritis immunohistochemistry stained synovial tissue},
+  author={Gallagher-Syed, A and Khan, A and Rivellese, F and Pitzalis, C and Lewis, MJ and Slabaugh, G},
+  booktitle={27th Conference on Medical Image Understanding and Analysis 2023},
+  pages={76}
+}
+````
 
 Gallagher-Syed A., Khan A., Rivellese F, Pitzalis C., Lewis M. J., Slabaugh G., Barnes M., "Automated segmentation of rheumatoid arthritis immunohistochemistry stained synovial tissue", _Medical Image Understanding and Analysis_, Aberdeen. 2023. <a href="https://arxiv.org/abs/2309.07255" target="_blank">Conference abstract paper.</a>
 
